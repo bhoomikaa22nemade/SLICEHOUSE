@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+
+<head>
+<meta charset="UTF-8">
+<title>Mania Pizzas | SliceHouse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+.page-content{
+    padding:40px;
+}
+
+h1{
+    text-align:center;
+    color:#7b0000;
+    margin-bottom:40px;
+    font-size:38px;
+}
+
+/* remove underline */
+.pizza-grid a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.pizza-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+    max-width:1300px;
+    margin:auto;
+}
+
+.pizza-card{
+    background:#111;
+    border-radius:20px;
+    padding:18px;
+    color:#fff;
+    box-shadow:0 15px 35px rgba(0,0,0,0.4);
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    transition:0.3s;
+}
+
+.pizza-card:hover{
+    transform:translateY(-6px);
+}
+
+.pizza-card img{
+    width:100%;
+    height:180px;
+    object-fit:contain;
+    border-radius:14px;
+    margin-bottom:12px;
+}
+
+.pizza-card h3{
+    margin:10px 0;
+    color:#ffc107;
+    font-size:18px;
+}
+
+.pizza-card p{
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:10px;
+    flex-grow:1;
+}
+
+.ingredients{
+    font-size:13px;
+    opacity:0.9;
+}
+
+.price{
+    font-weight:600;
+    color:#ffcc00;
+    font-size:16px;
+    margin-top:10px;
+}
+
+@media(max-width:1100px){
+.pizza-grid{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+@media(max-width:600px){
+.pizza-grid{
+grid-template-columns:1fr;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="page-content">
+
+<h1>Mania Pizzas</h1>
+
+<div class="pizza-grid">
+
+<div th:each="pizza : ${maniaPizzas}">
+
+<a th:href="@{/pizza/{id}(id=${pizza.id})}">
+
+<div class="pizza-card">
+
+<img th:src="@{/pizza/image/{id}(id=${pizza.id})}" alt="pizza">
+
+<h3 th:text="${pizza.name}"></h3>
+
+<p th:text="${pizza.description}"></p>
+
+<p class="ingredients">
+<b>Ingredients:</b>
+<span th:text="${pizza.smallDescription}"></span>
+</p>
+
+<p class="price">
+₹<span th:text="${pizza.sellingPrice}"></span>
+</p>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

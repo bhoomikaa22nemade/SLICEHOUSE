@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div class="container mt-5">
+
+<h2>Track Shipment</h2>
+
+<form th:action="@{/shipping/track}" method="post">
+<input type="text" name="trackingNumber" placeholder="Enter Tracking Number" class="form-control mb-2"/>
+<button class="btn btn-primary">Track</button>
+</form>
+
+</div>
+
+</body>
+</html>

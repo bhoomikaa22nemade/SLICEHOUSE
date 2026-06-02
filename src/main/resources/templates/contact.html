@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+
+<head>
+<meta charset="UTF-8">
+<title>Contact Us | SliceHouse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+.contact-section{
+    padding:60px 20px;
+    background:#f5b400;
+    min-height:80vh;
+}
+
+.contact-container{
+    max-width:900px;
+    margin:auto;
+    background:#111;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.4);
+}
+
+.contact-title{
+    text-align:center;
+    color:#ffc107;
+    font-size:34px;
+    margin-bottom:30px;
+}
+
+.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    padding:12px 15px;
+    border:none;
+    border-radius:8px;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+}
+
+.contact-form textarea{
+    resize:none;
+    height:120px;
+}
+
+.contact-form button{
+    background:#ffcc00;
+    border:none;
+    padding:12px;
+    font-weight:600;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.contact-form button:hover{
+    background:#ffd633;
+}
+
+.contact-info{
+    margin-top:30px;
+    text-align:center;
+    color:#ccc;
+    font-size:14px;
+}
+
+.contact-info p{
+    margin:6px 0;
+}
+
+/* POPUP */
+
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+justify-content:center;
+align-items:center;
+}
+
+.popup-content{
+background:white;
+padding:30px;
+border-radius:10px;
+text-align:center;
+font-family:Poppins;
+}
+
+.popup-content h2{
+color:green;
+margin-bottom:10px;
+}
+
+.popup-content button{
+margin-top:15px;
+padding:8px 15px;
+border:none;
+background:#ffcc00;
+cursor:pointer;
+border-radius:6px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+<section class="contact-section">
+
+<div class="contact-container">
+
+<h1 class="contact-title">Contact SliceHouse</h1>
+
+<form class="contact-form" onsubmit="showPopup(event)">
+
+<input type="text" placeholder="Your Name" required>
+
+<input type="email" placeholder="Your Email" required>
+
+<input type="text" placeholder="Subject">
+
+<textarea placeholder="Write your message here..."></textarea>
+
+<button type="submit">Send Message</button>
+
+</form>
+
+<div class="contact-info">
+
+<p>📍 Mumbai, India</p>
+
+<p>📞 +91 98765 43210</p>
+
+<p>✉ support@slicehouse.com</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- POPUP -->
+
+<div id="successPopup" class="popup">
+
+<div class="popup-content">
+
+<h2>✅ Message Sent!</h2>
+
+<p>Your message has been successfully sent.</p>
+
+<button onclick="closePopup()">OK</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function showPopup(event){
+
+event.preventDefault();
+
+document.getElementById("successPopup").style.display="flex";
+
+}
+
+function closePopup(){
+
+document.getElementById("successPopup").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>

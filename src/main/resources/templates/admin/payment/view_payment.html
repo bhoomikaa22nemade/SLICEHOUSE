@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="container mt-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Payment Management</h1>
+
+        <a th:href="@{/admin/payments/add}" class="btn btn-primary">
+            Add Payment
+        </a>
+    </div>
+
+    <!-- TABLE -->
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Order ID</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <!-- LOOP -->
+            <tr th:each="payment : ${payments}">
+
+                <td th:text="${payment.id}"></td>
+
+                <!-- ORDER -->
+                <td th:text="${payment.order != null ? payment.order.id : 'N/A'}"></td>
+
+                <!-- AMOUNT -->
+                <td th:text="'₹ ' + ${payment.amount}"></td>
+
+                <!-- METHOD -->
+                <td th:text="${payment.paymentMethod}"></td>
+
+                <!-- ✅ SIMPLE STATUS BADGES -->
+                <td>
+
+                    <span class="badge bg-success"
+                          th:if="${payment.paymentStatus == 'PAID'}">PAID</span>
+
+                    <span class="badge bg-danger"
+                          th:if="${payment.paymentStatus == 'FAILED'}">FAILED</span>
+
+                    <span class="badge bg-secondary"
+                          th:if="${payment.paymentStatus == 'PENDING'}">PENDING</span>
+
+                    <span class="badge bg-warning text-dark"
+                          th:if="${payment.paymentStatus == 'REFUNDED'}">REFUNDED</span>
+
+                </td>
+
+                <!-- DATE -->
+                <td th:text="${payment.createdAt != null ? #temporals.format(payment.createdAt, 'dd-MM-yyyy HH:mm') : 'N/A'}"></td>
+
+            </tr>
+
+            <!-- EMPTY -->
+            <tr th:if="${payments == null || payments.isEmpty()}">
+                <td colspan="6" class="text-center">No payments found</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="container mt-4">
+
+    <h1>Add Payment</h1>
+
+    <form th:action="@{/admin/payments/add}" method="post">
+
+    <!-- ORDER -->
+    <div class="mb-3">
+        <label>Order</label>
+        <select class="form-control" name="order.id" required>
+            <option value="">-- Select Order --</option>
+            <option th:each="o : ${orders}"
+                    th:value="${o.id}"
+                    th:text="'Order #' + ${o.id}">
+            </option>
+        </select>
+    </div>
+
+    <!-- AMOUNT -->
+    <div class="mb-3">
+        <label>Amount</label>
+        <input type="number" step="0.01"
+               class="form-control"
+               name="amount"
+               required>
+    </div>
+
+   <!-- PAYMENT METHOD -->
+<div class="mb-3">
+    <label class="form-label">Payment Method</label>
+    <select class="form-control" name="paymentMethod" required>
+        <option value="">-- Select Method --</option>
+        <option value="COD">Cash on Delivery</option>
+        <option value="CARD">Card</option>
+        <option value="UPI">UPI</option>
+    </select>
+</div>
+
+<!-- STATUS -->
+<div class="mb-3">
+    <label class="form-label">Status</label>
+    <select class="form-control" name="paymentStatus" required>
+        <option value="">-- Select Status --</option>
+        <option value="PENDING" selected>PENDING</option>
+        <option value="PAID">PAID</option>
+        <option value="FAILED">FAILED</option>
+        <option value="REFUNDED">REFUNDED</option>
+    </select>
+</div>
+
+<!-- BUTTONS -->
+<button type="submit" class="btn btn-success">Save</button>
+<a th:href="@{/admin/payments}" class="btn btn-secondary ms-2">Cancel</a>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

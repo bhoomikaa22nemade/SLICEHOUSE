@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="container mt-4">
+
+    <div class="head">
+        <h1>Update Pizza</h1>
+    </div>
+
+    <form th:action="@{/admin/pizzas/update}"
+          method="post"
+          th:object="${pizza}"
+          enctype="multipart/form-data">
+
+        <!-- Hidden ID -->
+        <input type="hidden" th:field="*{id}">
+
+        <!-- Pizza Name -->
+        <div class="mb-3">
+            <label class="form-label">Pizza Name</label>
+            <input type="text"
+                   class="form-control"
+                   th:field="*{name}"
+                   placeholder="Enter pizza name">
+        </div>
+
+        <!-- Category -->
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+
+            <select class="form-select" th:field="*{category}">
+                <option value="">-- Select Category --</option>
+
+                <option th:each="cat : ${categories}"
+                        th:value="${cat}"
+                        th:text="${cat}">
+                </option>
+
+            </select>
+        </div>
+
+        <!-- Short Description -->
+        <div class="mb-3">
+            <label class="form-label">Short Description</label>
+
+            <input type="text"
+                   class="form-control"
+                   th:field="*{smallDescription}"
+                   placeholder="Enter short description">
+        </div>
+
+        <!-- Full Description -->
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+
+            <textarea class="form-control"
+                      rows="4"
+                      th:field="*{description}"
+                      placeholder="Enter pizza description">
+            </textarea>
+        </div>
+
+        <!-- Selling Price -->
+        <div class="mb-3">
+            <label class="form-label">Selling Price</label>
+
+            <input type="number"
+                   class="form-control"
+                   th:field="*{sellingPrice}"
+                   placeholder="Enter selling price">
+        </div>
+
+        <!-- Discounted Price -->
+        <div class="mb-3">
+            <label class="form-label">Discounted Price</label>
+
+            <input type="number"
+                   class="form-control"
+                   th:field="*{discountedPrice}"
+                   placeholder="Enter discounted price">
+        </div>
+
+        <!-- Current Image -->
+        <div class="mb-3">
+            <label class="form-label">Current Image</label>
+
+            <div th:if="${pizza.productImage != null}">
+                <img th:src="@{'/admin/pizzas/images/' + ${pizza.id}}"
+                     width="150">
+            </div>
+
+            <div th:if="${pizza.productImage == null}">
+                No Image
+            </div>
+        </div>
+
+        <!-- Upload New Image -->
+        <div class="mb-3">
+            <label class="form-label">Change Image</label>
+
+            <input type="file"
+                   class="form-control"
+                   name="imageFile">
+        </div>
+
+        <!-- Buttons -->
+        <button type="submit" class="btn btn-primary">
+            Update Pizza
+        </button>
+
+        <a th:href="@{/admin/pizzas}"
+           class="btn btn-secondary ms-3">
+           Cancel
+        </a>
+
+    </form>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<header class="navbar" th:fragment="navbar"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div class="nav-container">
+
+    <!-- LEFT SIDE -->
+    <div class="nav-left">
+        <a href="/" class="brand-name">SliceHouse</a>
+        <a th:href="@{/about}">About</a>
+        <a th:href="@{/contact}">Contact</a>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="nav-right">
+
+        <!-- NOT LOGGED IN -->
+        <div sec:authorize="isAnonymous()" class="auth-section">
+            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/register}">Register</a>
+        </div>
+
+        <!-- LOGGED IN -->
+        <div sec:authorize="isAuthenticated()" class="auth-section">
+
+            <span class="welcome-text">
+                👤 Welcome, <span sec:authentication="name"></span>
+            </span>
+
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+
+        </div>
+
+        <!-- My Orders -->
+        <a sec:authorize="isAuthenticated()" th:href="@{/order}" class="orders-link">
+            📦 My Orders
+        </a>
+
+        <!-- Cart -->
+        <a th:href="@{/cart}" class="cart-icon">
+            🛒 <span id="cart-count">0</span>
+        </a>
+
+    </div>
+
+</div>
+
+</header>

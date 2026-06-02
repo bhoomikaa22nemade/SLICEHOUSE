@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="container mt-4">
+
+    <h1>Update Payment</h1>
+
+    <form th:action="@{/admin/payments/update}" method="post">
+
+        <!-- PAYMENT ID (HIDDEN) -->
+        <input type="hidden" name="id" th:value="${payment.id}">
+
+        <!-- ORDER -->
+        <div class="mb-3">
+            <label>Order</label>
+            <select class="form-control" name="order.id" required>
+
+                <option value="">-- Select Order --</option>
+
+                <option th:each="o : ${orders}"
+                        th:value="${o.id}"
+                        th:text="'Order #' + ${o.id}"
+                        th:selected="${payment.order != null && payment.order.id == o.id}">
+                </option>
+
+            </select>
+        </div>
+
+        <!-- AMOUNT -->
+        <div class="mb-3">
+            <label>Amount</label>
+            <input type="number" step="0.01"
+                   class="form-control"
+                   name="amount"
+                   th:value="${payment.amount}"
+                   required>
+        </div>
+
+        <!-- PAYMENT METHOD -->
+        <div class="mb-3">
+            <label>Payment Method</label>
+            <select class="form-control" name="paymentMethod" required>
+
+                <option value="COD"
+                        th:selected="${payment.paymentMethod == 'COD'}">COD</option>
+
+                <option value="CARD"
+                        th:selected="${payment.paymentMethod == 'CARD'}">CARD</option>
+
+                <option value="UPI"
+                        th:selected="${payment.paymentMethod == 'UPI'}">UPI</option>
+
+            </select>
+        </div>
+
+        <!-- STATUS -->
+        <div class="mb-3">
+            <label>Status</label>
+            <select class="form-control" name="paymentStatus" required>
+
+                <option value="PAID"
+                        th:selected="${payment.paymentStatus == 'PAID'}">PAID</option>
+
+                <option value="FAILED"
+                        th:selected="${payment.paymentStatus == 'FAILED'}">FAILED</option>
+
+                <option value="REFUNDED"
+                        th:selected="${payment.paymentStatus == 'REFUNDED'}">REFUNDED</option>
+
+            </select>
+        </div>
+
+        <!-- BUTTONS -->
+        <button class="btn btn-warning">Update</button>
+        <a th:href="@{/admin/payments}" class="btn btn-secondary">Cancel</a>
+
+    </form>
+
+</div>
+
+</div>
+
+</body>
+</html>

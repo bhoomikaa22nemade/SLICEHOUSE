@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+    <div class="container mt-4">
+        <h2>Add New Order</h2>
+
+       
+<form th:action="@{/admin/orders/add}" method="post">
+
+    <!-- User -->
+    <div class="mb-3">
+        <label>User</label>
+        <select name="userId" class="form-select">
+            <option th:each="user : ${users}"
+                    th:value="${user.id}"
+                    th:text="${user.username}">
+            </option>
+        </select>
+    </div>
+
+    <!-- Pizza -->
+    <div class="mb-3">
+        <label>Pizza</label>
+        <select name="pizzaId" class="form-select">
+            <option th:each="pizza : ${pizzas}"
+                    th:value="${pizza.id}"
+                    th:text="${pizza.name}">
+            </option>
+        </select>
+    </div>
+
+    <!-- Address -->
+    <div class="mb-3">
+        <label>Address</label>
+        <select name="addressId" class="form-select">
+          <option th:each="address : ${addresses}"
+        th:value="${address.id}"
+        th:text="${address.city + ' - ' + address.area}">
+</option>
+            </option>
+        </select>
+    </div>
+
+    <!-- Quantity -->
+   <div class="mb-3">
+    <label class="form-label text-white">Quantity</label>
+    <input type="number" name="quantity" class="form-control" min="1" placeholder="Enter quantity">
+</div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+            <!-- Buttons
+            <button type="submit" class="btn btn-success">Save</button>
+            <a th:href="@{/admin/orders}" class="btn btn-secondary ms-2">Cancel</a>
+        </form> -->
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Add Address | SliceHouse</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<h2 class="mb-4">Add New Address</h2>
+
+<form th:action="@{/address/add}" th:object="${address}" method="post">
+
+<!-- NAME -->
+
+<div class="mb-3">
+
+<label class="form-label">Name</label>
+
+<input type="text"
+class="form-control"
+th:field="*{name}"
+placeholder="Enter name"
+required>
+
+</div>
+
+<!-- AREA -->
+
+<div class="mb-3">
+
+<label class="form-label">Area</label>
+
+<input type="text"
+class="form-control"
+th:field="*{area}"
+placeholder="Enter area"
+required>
+
+</div>
+
+<!-- CITY -->
+
+<div class="mb-3">
+
+<label class="form-label">City</label>
+
+<input type="text"
+class="form-control"
+th:field="*{city}"
+placeholder="Enter city"
+required>
+
+</div>
+
+<!-- STATE -->
+
+<div class="mb-3">
+
+<label class="form-label">State</label>
+
+<select class="form-select" th:field="*{state}" required>
+
+<option value="">Select State</option>
+
+<option th:each="s : ${states}"
+        th:value="${s}"
+        th:text="${s}">
+</option>
+
+</select>
+
+</div>
+
+<!-- PINCODE -->
+
+<div class="mb-3">
+
+<label class="form-label">Pincode</label>
+
+<input type="number"
+class="form-control"
+th:field="*{pincode}"
+placeholder="Enter pincode"
+required>
+
+</div>
+
+<button type="submit" class="btn btn-success">
+Save Address
+</button>
+
+<a th:href="@{/address}" class="btn btn-secondary ms-2">
+Cancel
+</a>
+
+</form>
+
+</div>
+
+</body>
+
+</html>

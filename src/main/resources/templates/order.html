@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+
+<head>
+<title>My Orders | SliceHouse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f5b400;
+    font-family:'Poppins', sans-serif;
+}
+
+/* ORDER CARD */
+
+.order-card{
+    margin:40px auto;
+    max-width:650px;
+    background:#111;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+    color:white;
+}
+
+/* TITLE */
+
+.order-title{
+    font-size:24px;
+    font-weight:600;
+    color:#ffc107;
+    margin-bottom:20px;
+}
+
+/* DATE */
+
+.order-info{
+    margin-bottom:20px;
+}
+
+.order-info span{
+    color:#bbb;
+    font-size:14px;
+}
+
+.order-info p{
+    margin:5px 0;
+    font-weight:500;
+}
+
+/* STATUS */
+
+.order-status{
+    margin:20px 0;
+    font-weight:600;
+    color:#ffc107;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.status-dot{
+    width:10px;
+    height:10px;
+    background:#ffcc00;
+    border-radius:50%;
+}
+
+/* PRODUCT BOX */
+
+.product-box{
+    background:#1c1c1c;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.product-row{
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0;
+}
+
+.product-name{
+    font-weight:600;
+    color:#ffc107;
+}
+
+/* TOTAL */
+
+.total-box{
+    border-top:1px solid #333;
+    padding-top:15px;
+    margin-top:10px;
+    display:flex;
+    justify-content:space-between;
+    font-size:18px;
+    font-weight:600;
+    color:#ffc107;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+<div th:each="o : ${orders}" class="order-card">
+
+<div class="order-title">🧾 Purchase Receipt</div>
+
+<div class="order-info">
+<span>Date</span>
+<p th:text="${o.orderAt}">2026-03-06</p>
+</div>
+
+<!-- STATUS -->
+
+<div class="order-status">
+<div class="status-dot"></div>
+<span>Order Placed</span>
+</div>
+
+<!-- PRODUCT -->
+
+<div class="product-box">
+
+<div class="product-row">
+<span class="product-name" th:text="${o.pizza.name}">Pizza Name</span>
+<span>₹ <span th:text="${o.pizza.discountedPrice}">0</span></span>
+</div>
+
+<div class="product-row">
+<span>Shipping</span>
+<span>₹40</span>
+</div>
+
+</div>
+
+<!-- TOTAL -->
+
+<div class="total-box">
+<span>Total Price</span>
+<span>₹ <span th:text="${o.pizza.discountedPrice + 40}">0</span></span>
+</div>
+
+</div>
+
+</section>
+
+</body>
+</html>
+

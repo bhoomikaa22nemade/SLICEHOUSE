@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+```
+<div class="container mt-4">
+
+    <div class="head mb-3">
+        <h1>Update User</h1>
+    </div>
+
+    <!-- Update User Form -->
+    <form th:action="@{/admin/users/update}" 
+          method="post" 
+          th:object="${user}">
+
+        <!-- Hidden ID -->
+        <input type="hidden" th:field="*{id}">
+
+        <!-- Username -->
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+
+            <input type="text"
+                   class="form-control"
+                   th:field="*{username}"
+                   placeholder="Enter username"
+                   required>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+
+            <input type="password"
+                   class="form-control"
+                   th:field="*{password}"
+                   placeholder="Enter password"
+                   required>
+        </div>
+
+        <!-- Role -->
+        <div class="mb-3">
+            <label class="form-label">Role</label>
+
+            <select class="form-control" th:field="*{role}">
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+            </select>
+        </div>
+
+        <!-- Buttons -->
+        <button type="submit" class="btn btn-primary">
+            Update User
+        </button>
+
+        <a th:href="@{/admin/users}" 
+           class="btn btn-secondary ms-3">
+           Cancel
+        </a>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+</body>
+</html>

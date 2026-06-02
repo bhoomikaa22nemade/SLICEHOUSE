@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+    <div class="container mt-4">
+        <h1>Order Management</h1>
+
+        <!-- ADD ORDER -->
+        <a th:href="@{/admin/orders/add}" class="btn btn-primary mb-3">
+            Add New Order
+        </a>
+
+        <!-- TABLE -->
+        <table class="table table-bordered table-striped">
+
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Product</th>
+                <th>Customer Name</th>
+                <th>Address</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="order : ${orders}">
+
+                <td th:text="${order.id}"></td>
+
+                <td th:text="${order.pizza != null ? order.pizza.name : 'N/A'}"></td>
+
+                <td th:text="${order.user != null ? order.user.username : 'N/A'}"></td>
+
+                <td th:text="${order.address != null ? order.address.city : 'N/A'}"></td>
+
+                <td th:text="${order.quantity}"></td>
+
+                <td th:text="${order.pizza != null ? order.quantity * order.pizza.discountedPrice : 0}"></td>
+
+                <td th:text="${order.orderAt}"></td>
+
+                <td th:text="${order.status}"></td>
+
+                <!-- ✅ FIXED ACTIONS -->
+                <td>
+
+                    <!-- 🚚 ADD SHIPPING -->
+                    <a th:href="@{/admin/shipping/add/{id}(id=${order.id})}"
+                       class="btn btn-primary btn-sm">
+                        🚚 Add Shipping
+                    </a>
+
+                    <!-- EDIT -->
+                    <a th:href="@{/admin/orders/update/{id}(id=${order.id})}"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <!-- DELETE -->
+                    <a th:href="@{/admin/orders/delete/{id}(id=${order.id})}"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete?')">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

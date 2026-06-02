@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Latte Collection | SliceHouse</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: 'Poppins', sans-serif;
+            background: #ddc3b4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #301e1e;
+            margin-bottom: 40px;
+            font-size: 38px;
+        }
+
+        .latte-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .latte-card {
+            background: #111;
+            border-radius: 22px;
+            padding: 18px;
+            color: #fff;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .latte-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            background: transparent;
+        }
+
+        .latte-card h3 {
+            color: #ffc107;
+            margin: 8px 0;
+            font-size: 18px;
+        }
+
+        .latte-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #ffcc00;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .latte-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .latte-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Coffees</h1>
+
+<div class="latte-grid">
+
+    <!-- CARD 1 -->
+    <div class="latte-card">
+        <img src="images/coffe1.png" alt="Classic Latte">
+        <h3>Classic Latte</h3>
+        <p>
+            A smooth blend of rich espresso and steamed milk,
+            topped with a light creamy foam. Perfectly balanced
+            and comforting for everyday coffee lovers.
+        </p>
+        <p class="price">₹129</p>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="latte-card">
+        <img src="images/coffe2.png" alt="Vanilla Latte">
+        <h3>Vanilla Latte</h3>
+        <p>
+            Classic latte infused with sweet vanilla flavor,
+            delivering a soft, aromatic taste that feels warm
+            and comforting with every sip.
+        </p>
+        <p class="price">₹149</p>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="latte-card">
+        <img src="images/coffee3.png" alt="Caramel Latte">
+        <h3>Caramel Latte</h3>
+        <p>
+            Bold espresso combined with steamed milk and rich
+            caramel syrup. A deep, indulgent coffee with a
+            smooth and buttery finish.
+        </p>
+        <p class="price">₹159</p>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="latte-card">
+        <img src="images/coffee4.png" alt="Hazelnut Latte">
+        <h3>Hazelnut Latte</h3>
+        <p>
+            A nutty twist on the classic latte blended with
+            smooth hazelnut essence. Warm, aromatic, and
+            lightly sweet for a cozy coffee experience.
+        </p>
+        <p class="price">₹159</p>
+    </div>
+
+</div>
+
+</body>
+</html>

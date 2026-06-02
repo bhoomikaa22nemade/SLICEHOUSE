@@ -1,0 +1,547 @@
+<!-- <!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+
+<head>
+<meta charset="UTF-8">
+<title th:text="${pizza.name} + ' | SliceHouse'">Pizza Details</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+.page-content{
+padding:40px;
+background:#f5b400;
+min-height:100vh;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+background:#111;
+color:#fff;
+padding:40px;
+border-radius:24px;
+}
+
+.top-section{
+display:flex;
+gap:50px;
+margin-bottom:40px;
+}
+
+.top-section img{
+width:420px;
+height:440px;
+object-fit:cover;
+border-radius:22px;
+box-shadow:0 20px 50px rgba(0,0,0,.6);
+}
+
+h1{
+color:#ffc107;
+font-size:42px;
+}
+
+.desc{
+font-size:15px;
+line-height:1.8;
+}
+
+.price{
+font-size:28px;
+font-weight:600;
+color:#ffcc00;
+margin:15px 0;
+}
+
+select,button{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border-radius:8px;
+border:none;
+}
+
+button{
+background:#7b0000;
+color:#fff;
+cursor:pointer;
+font-size:16px;
+}
+
+.section{
+margin-top:40px;
+}
+
+.section h2{
+color:#ffc107;
+}
+
+.coupon{
+background:#1c1c1c;
+padding:15px;
+border-radius:12px;
+margin-bottom:10px;
+display:block;
+}
+
+.coupon span{
+color:#ffcc00;
+font-weight:600;
+}
+
+@media(max-width:900px){
+.top-section{
+flex-direction:column;
+}
+
+.top-section img{
+width:100%;
+height:380px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="page-content">
+
+<div class="container">
+
+<div class="top-section">
+
+<img th:src="@{/pizza/image/{id}(id=${pizza.id})}" th:alt="${pizza.name}"/>
+
+<div>
+
+<h1 th:text="${pizza.name}"></h1>
+
+<p class="desc" th:text="${pizza.description}"></p>
+
+<p><b>Ingredients:</b></p>
+<p th:text="${pizza.smallDescription}"></p>
+
+<!- ================= FORM ================= -->
+
+<!-- <form id="cartForm">
+
+    <!hidden -->
+    <!-- <input type="hidden" name="pizzaId" th:value="${pizza.id}">
+    <input type="hidden" id="couponInput" name="coupon">
+
+    <!SIZE -->
+    <!-- <select name="size" id="size" onchange="updatePrice()">
+        <option th:value="'Regular'" th:data-price="${pizza.sellingPrice}"
+                th:text="'Regular - ₹' + ${pizza.sellingPrice}"></option>
+
+        <option th:value="'Medium'" th:data-price="${pizza.sellingPrice + 100}"
+                th:text="'Medium - ₹' + (${pizza.sellingPrice + 100})"></option>
+
+        <option th:value="'Large'" th:data-price="${pizza.sellingPrice + 200}"
+                th:text="'Large - ₹' + (${pizza.sellingPrice + 200})"></option>
+    </select> --> 
+
+    <!-- PRICE -->
+    <!-- <div class="price">
+        ₹ <span id="priceDisplay" th:text="${pizza.sellingPrice}"></span>
+    </div> -->
+
+    <!-- QUANTITY -->
+    <!-- <select name="quantity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select> -->
+
+    <!-- ADDRESS -->
+    <!-- <select name="addressId" required>
+        <option value="">-- Select Address --</option>
+        <option th:each="addr : ${addresses}"
+                th:value="${addr.id}"
+                th:text="${addr.city + ' - ' + addr.area}">
+        </option>
+    </select> -->
+
+    <!-- BUTTONS -->
+    <!-- <button type="submit"
+            formaction="/cart/add"
+            formmethod="post">
+        Add to Cart
+    </button>
+
+    <button type="submit"
+            formaction="/place-order"
+            formmethod="post"
+            style="background:green;">
+        Order Now
+    </button> -->
+
+    
+
+<!-- </form>
+<form action="/wishlist/add" method="post">
+    <input type="hidden" name="pizzaId" th:value="${pizza.id}">
+    
+    <button type="submit" style="background:#ff9800;">
+        ❤️ Add to Wishlist
+    </button>
+</form>
+
+</div>
+
+</div> -->
+
+<!-- ================= COUPONS ================= -->
+
+<!-- <div class="section">
+
+<h2>Offers & Coupons</h2>
+
+<label class="coupon">
+<input type="radio" name="couponRadio" value="CHEESE20">
+<span>CHEESE20</span> – 20% OFF above ₹399
+</label>
+
+<label class="coupon">
+<input type="radio" name="couponRadio" value="SLICE50">
+<span>SLICE50</span> – ₹50 OFF first order
+</label>
+
+<label class="coupon">
+<input type="radio" name="couponRadio" value="FREEDLV">
+<span>FREEDLV</span> – Free Delivery above ₹299
+</label>
+
+</div> -->
+
+<!-- ================= DESCRIPTION ================= -->
+
+<!-- <div class="section">
+
+<h2>Why Customers Love It ❤️</h2>
+
+<p class="desc">
+Customers love this pizza for its rich cheese layers,
+soft crust and consistent taste. Perfect for parties
+and midnight cravings!
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function updatePrice(){
+    let select=document.getElementById("size");
+    let price=select.options[select.selectedIndex].dataset.price;
+    document.getElementById("priceDisplay").innerText=price;
+}
+
+// capture coupon
+document.getElementById("cartForm").addEventListener("submit", function(){
+    let coupon=document.querySelector('input[name="couponRadio"]:checked');
+    if(coupon){
+        document.getElementById("couponInput").value=coupon.value;
+    }
+});
+
+</script>
+
+</body>
+</html>  -->
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+
+<head>
+<meta charset="UTF-8">
+<title th:text="${pizza.name} + ' | SliceHouse'">Pizza Details</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+.page-content{
+padding:40px;
+background:#f5b400;
+min-height:100vh;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+background:#111;
+color:#fff;
+padding:40px;
+border-radius:24px;
+}
+
+.top-section{
+display:flex;
+gap:50px;
+margin-bottom:40px;
+}
+
+.top-section img{
+width:420px;
+height:440px;
+object-fit:cover;
+border-radius:22px;
+}
+
+h1{
+color:#ffc107;
+font-size:42px;
+}
+
+.desc{
+font-size:15px;
+line-height:1.8;
+}
+
+.price{
+font-size:28px;
+font-weight:600;
+color:#ffcc00;
+margin:15px 0;
+}
+
+select,button{
+width:100%;
+padding:12px;
+margin-bottom:12px;
+border-radius:8px;
+border:none;
+}
+
+button{
+cursor:pointer;
+font-size:16px;
+}
+
+.cart-btn{ background:#7b0000; color:#fff; }
+.wishlist-btn{ background:#ff9800; color:#fff; }
+.order-btn{ background:green; color:#fff; }
+
+.section{
+margin-top:30px;
+}
+
+.coupon{
+background:#1c1c1c;
+padding:12px;
+border-radius:10px;
+margin-bottom:10px;
+display:block;
+}
+
+.review-box{
+background:#1c1c1c;
+padding:15px;
+border-radius:10px;
+margin-bottom:10px;
+}
+.review-box{
+    width:100%;
+    min-height:180px;     /* 🔥 long box */
+    padding:16px;
+    border-radius:14px;
+    border:none;
+    outline:none;
+    font-size:15px;
+    line-height:1.6;
+    background:#f9f9f9;
+    color:#333;
+    resize:none;
+}
+
+/* focus effect */
+.review-box:focus{
+    box-shadow:0 0 0 2px #ffc107;
+    background:white;
+}
+</style>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="page-content">
+
+<div class="container">
+
+<div class="top-section">
+
+<!-- IMAGE -->
+<img th:src="@{/pizza/image/{id}(id=${pizza.id})}" th:alt="${pizza.name}"/>
+
+<div>
+
+<h1 th:text="${pizza.name}"></h1>
+
+<p class="desc" th:text="${pizza.description}"></p>
+
+<p><b>Ingredients:</b></p>
+<p th:text="${pizza.smallDescription}"></p>
+
+<!-- ================= CART ================= -->
+<form id="cartForm" th:action="@{/cart/add}" method="post">
+    <input type="hidden" name="pizzaId" th:value="${pizza.id}">
+    <input type="hidden" id="couponInput" name="coupon">
+
+    <select name="size" id="size" onchange="updatePrice()">
+        <option th:value="'Regular'" th:data-price="${pizza.sellingPrice}"
+                th:text="'Regular - ₹' + ${pizza.sellingPrice}"></option>
+        <option th:value="'Medium'" th:data-price="${pizza.sellingPrice + 100}"
+                th:text="'Medium - ₹' + (${pizza.sellingPrice + 100})"></option>
+        <option th:value="'Large'" th:data-price="${pizza.sellingPrice + 200}"
+                th:text="'Large - ₹' + (${pizza.sellingPrice + 200})"></option>
+    </select>
+
+    <div class="price">
+        ₹ <span id="priceDisplay" th:text="${pizza.sellingPrice}"></span>
+    </div>
+
+    <select name="quantity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+
+    <button type="submit" class="cart-btn">Add to Cart</button>
+</form>
+
+<!-- ================= WISHLIST ================= -->
+<form th:action="@{/admin/wishlist/add}" method="post">
+    <input type="hidden" name="pizzaId" th:value="${pizza.id}" />
+    <button type="submit" class="wishlist-btn">❤️ Add to Wishlist</button>
+</form>
+
+<!-- ================= ORDER ================= -->
+<form th:action="@{/place-order}" method="post">
+    <input type="hidden" name="pizzaId" th:value="${pizza.id}">
+    <button type="submit" class="order-btn">Order Now</button>
+</form>
+
+</div>
+
+</div>
+
+<!-- ================= REVIEW FORM ================= -->
+<div class="section">
+
+<h2>⭐ Add Review</h2>
+
+<form action="/review/add" method="post">
+    <input type="hidden" name="pizzaId" th:value="${pizza.id}"/>
+
+    <select name="rating" required>
+        <option value="">Select Rating</option>
+        <option value="5">⭐⭐⭐⭐⭐</option>
+        <option value="4">⭐⭐⭐⭐</option>
+        <option value="3">⭐⭐⭐</option>
+        <option value="2">⭐⭐</option>
+        <option value="1">⭐</option>
+    </select>
+<textarea name="reviewText" class="review-box"
+          placeholder="Write your review here..."></textarea>
+
+    <button type="submit">Submit Review</button>
+</form>
+
+</div>
+
+<!-- ================= SHOW REVIEWS ================= -->
+<div class="section">
+
+<h2>Customer Reviews</h2>
+
+<div th:if="${reviews != null}">
+
+<div th:each="r : ${reviews}" class="review-box">
+
+    <p><b th:text="${r.user.username}"></b></p>
+
+    <p>⭐ Rating: <span th:text="${r.rating}"></span></p>
+
+    <p th:text="${r.reviewText}"></p>
+
+</div>
+
+</div>
+
+<p th:if="${reviews == null || reviews.isEmpty()}">
+    No reviews yet 😢
+</p>
+
+</div>
+
+<!-- ================= COUPONS ================= -->
+<div class="section">
+
+<h2>Offers & Coupons</h2>
+
+<label class="coupon">
+<input type="radio" name="couponRadio" value="CHEESE20">
+CHEESE20 – 20% OFF above ₹399
+</label>
+
+<label class="coupon">
+<input type="radio" name="couponRadio" value="SLICE50">
+SLICE50 – ₹50 OFF
+</label>
+
+<label class="coupon">
+<input type="radio" name="couponRadio" value="FREEDLV">
+FREEDLV – Free Delivery
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function updatePrice(){
+    let select = document.getElementById("size");
+    let price = select.options[select.selectedIndex].dataset.price;
+    document.getElementById("priceDisplay").innerText = price;
+}
+
+// coupon fix
+document.getElementById("cartForm").addEventListener("submit", function(){
+    let coupon = document.querySelector('input[name="couponRadio"]:checked');
+    if(coupon){
+        document.getElementById("couponInput").value = coupon.value;
+    }
+});
+
+</script>
+
+</body>
+</html>

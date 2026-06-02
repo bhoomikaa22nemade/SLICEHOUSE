@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Category Management</title>
+</head>
+<body>
+
+<h2>Category Management</h2>
+
+<!-- FORM -->
+<!-- FORM -->
+<form th:action="${category.categoryId != 0} ? @{/category/update} : @{/category/save}" method="post">
+    
+    <input type="hidden" name="categoryId" th:value="${category.categoryId}">
+
+    <input type="text" name="categoryName" placeholder="Category Name"
+           th:value="${category.categoryName}" required>
+
+    <input type="text" name="description" placeholder="Description"
+           th:value="${category.description}" required>
+
+    <button type="submit"
+        th:text="${category.categoryId != 0 ? 'Update' : 'Add'}">
+    </button>
+    <input type="text" name="image" placeholder="Image name (e.g. veg.png)" required>
+
+</form>
+
+
+<hr>
+
+<!-- TABLE -->
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="cat : ${categories}">
+        <td th:text="${cat.categoryId}"></td>
+        <td th:text="${cat.categoryName}"></td>
+        <td th:text="${cat.description}"></td>
+
+        <td>
+            <a th:href="@{/category/edit/{id}(id=${cat.categoryId})}">Edit</a> |
+            <a th:href="@{/category/delete/{id}(id=${cat.categoryId})}">Delete</a>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

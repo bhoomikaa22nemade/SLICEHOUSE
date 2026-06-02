@@ -1,0 +1,249 @@
+<!-- <!doctype html>
+
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="container mt-4">
+
+<h2 class="mb-4">Cart Items</h2>
+
+<a th:href="@{/admin/cart/add}" class="btn btn-primary mb-3">
+Add Cart Item
+</a>
+
+<table class="table table-bordered table-striped">
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>User</th>
+<th>Pizza</th>
+<th>Quantity</th>
+<th>Actions</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr th:each="item : ${cartItems}">
+
+<td th:text="${item.id}"></td>
+
+<td th:text="${item.user != null ? item.user.username : 'N/A'}"></td>
+
+<td th:text="${item.pizza != null ? item.pizza.name : 'N/A'}"></td>
+
+<td th:text="${item.quantity}"></td>
+
+<td>
+
+<a th:href="@{/admin/cart/delete/{id}(id=${item.id})}"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Delete this cart item?')">
+
+Delete
+
+</a>
+
+</td>
+
+</tr> -->
+
+<!-- When cart is empty -->
+
+<!-- <tr th:if="${#lists.isEmpty(cartItems)}">
+
+<td colspan="5" class="text-center">
+No cart items found
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
+ -->
+
+ <!-- <!doctype html>
+
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="container mt-4">
+
+<h2 class="mb-4">Cart Items</h2>
+
+<a th:href="@{/admin/cart/add}" class="btn btn-primary mb-3">
+Add Cart Item
+</a>
+
+<table class="table table-bordered table-striped">
+
+<thead class="table-dark">
+<tr>
+<th>ID</th>
+<th>User</th>
+<th>Pizza</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Total</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr th:each="item : ${cartItems}">
+
+<td th:text="${item.cartId}"></td>
+<td th:text="${item.user.username}"></td>
+<td th:text="${item.pizza.name}"></td>
+
+<td th:text="'₹ ' + ${item.pizza.sellingPrice}"></td>
+
+<td th:text="${item.quantity}"></td>
+
+<td th:text="'₹ ' + ${item.totalPrice}"></td>
+
+<td>
+<a th:href="@{/admin/cart/delete/{id}(id=${item.cartId})}"
+   class="btn btn-danger btn-sm">Delete</a>
+</td>
+
+</tr>
+
+<tr th:if="${cartItems == null || cartItems.isEmpty()}">
+<td colspan="7" class="text-center">No cart items found</td>
+</tr>
+
+</tbody>
+
+</table>
+
+<h4 class="text-end">
+Total: ₹ <span th:text="${totalAmount}"></span>
+</h4>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Cart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>My Cart</h2>
+
+    <a th:href="@{/admin/cart/add}" class="btn btn-primary">
+        + Add Cart Item
+    </a>
+</div>
+
+<table class="table table-bordered table-striped">
+
+<thead class="table-dark">
+<tr>
+    <th>Pizza</th>
+    <th>Size</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+    <th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr th:each="item : ${cartItems}">
+
+    <!-- ✅ PIZZA NAME -->
+    <td th:text="${item.pizza != null ? item.pizza.name : 'N/A'}"></td>
+
+    <!-- ✅ SIZE -->
+    <td th:text="${item.size != null ? item.size : 'Regular'}"></td>
+
+    <!-- ✅ PRICE (SINGLE ITEM PRICE) -->
+    <td>
+        ₹ <span th:text="${item.pizza != null 
+            ? (item.pizza.discountedPrice != null 
+                ? item.pizza.discountedPrice 
+                : item.pizza.sellingPrice)
+            : 0}">
+        </span>
+    </td>
+
+    <!-- ✅ QUANTITY -->
+    <td th:text="${item.quantity != null ? item.quantity : 0}"></td>
+
+    <!-- ✅ TOTAL (AFTER COUPON) -->
+    <td>
+        ₹ <span th:text="${item.totalPrice != null ? item.totalPrice : 0}"></span>
+    </td>
+
+    <!-- ✅ ACTION -->
+    <td>
+        <a th:href="@{/admin/cart/delete/{id}(id=${item.id})}"
+           class="btn btn-danger btn-sm"
+           onclick="return confirm('Delete this cart item?')">
+            Delete
+        </a>
+    </td>
+
+</tr>
+
+<!-- EMPTY -->
+<tr th:if="${cartItems == null || cartItems.isEmpty()}">
+    <td colspan="6" class="text-center">No cart items found</td>
+</tr>
+
+</tbody>
+
+</table>
+
+<!-- ✅ TOTAL AMOUNT -->
+<h4 class="text-end">
+    Total: ₹ <span th:text="${totalAmount}"></span>
+</h4>
+
+<div class="text-end">
+    <a href="/payment" class="btn btn-success">Proceed to Payment</a>
+</div>
+
+</div>
+
+</body>
+</html>

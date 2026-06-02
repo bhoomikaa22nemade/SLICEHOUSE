@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div class="container mt-5">
+
+<h2>Shipment Status</h2>
+
+<div th:if="${shipping != null}">
+<p><b>Status:</b> <span th:text="${shipping.shippingStatus}"></span></p>
+<p><b>Courier:</b> <span th:text="${shipping.courierService}"></span></p>
+<p><b>Tracking:</b> <span th:text="${shipping.trackingNumber}"></span></p>
+</div>
+
+<div th:if="${shipping == null}">
+<p>No shipment found</p>
+</div>
+
+</div>
+
+</body>
+</html>

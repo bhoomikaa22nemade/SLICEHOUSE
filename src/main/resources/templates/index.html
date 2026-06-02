@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{base}">
+
+<body>
+
+<div layout:fragment="content">
+
+    <!-- ================= HOME SECTION ================= -->
+    <div class="home-section">
+        <h1>Welcome to SliceHouse</h1>
+        <p>Where every slice is a piece of happiness.</p>
+
+        <div sec:authorize="isAnonymous()">
+            <p style="color:#888;margin:15px 0;"></p>
+        </div>
+    </div>
+
+    <!-- ================= PIZZA SECTION ================= -->
+    <h2 class="section-title">Our Pizzas</h2>
+
+    <div class="menu-grid">
+
+        <!-- Cheese Pizza -->
+        <a th:href="@{/cheese}" class="menu-link">
+            <div class="menu-card">
+                <img th:src="@{/images/cheezepizza.png}" alt="Cheese Pizza">
+                <h3>Cheese Pizza</h3>
+            </div>
+        </a>
+
+        <!-- Pepperoni Pizza -->
+        <a th:href="@{/pepperoni}" class="menu-link">
+            <div class="menu-card">
+                <img th:src="@{/images/pepperoni.png}" alt="Pepperoni Pizza">
+                <h3>Pepperoni Pizza</h3>
+            </div>
+        </a>
+
+        <!-- Veggie Pizza -->
+        <a th:href="@{/vegie}" class="menu-link">
+            <div class="menu-card">
+                <img th:src="@{/images/vegie.png}" alt="Veggie Pizza">
+                <h3>Veggie Pizza</h3>
+            </div>
+        </a>
+
+        <!-- Pizza Mania -->
+        <a th:href="@{/mania}" class="menu-link">
+            <div class="menu-card">
+                <img th:src="@{/images/margherita.png}" alt="Pizza Mania">
+                <h3>Pizza Mania</h3>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- ================= ADVERTISEMENT SECTION ================= -->
+    <section class="advertisement">
+
+        <div class="ad-banner">
+
+            <img th:src="@{/images/banner.png}" alt="Beverage Advertisement">
+
+            <div class="coming-marquee">
+                <span>
+                    🍹 BEVERAGES COMING SOON • REFRESHING DRINKS ARRIVING SOON • STAY TUNED 🍹
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!-- <!doctype html>
+
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="container mt-4">
+
+<h2 class="mb-4">Add Cart Item</h2>
+
+<form th:action="@{/admin/cart/add}" 
+      th:object="${cart}" 
+      method="post">
+
+USER
+
+<div class="mb-3">
+
+<label class="form-label">User</label>
+
+<select th:field="*{user.id}" class="form-select" required>
+
+<option value="">Select User</option>
+
+<option th:each="user : ${users}"
+        th:value="${user.id}"
+        th:text="${user.username}">
+</option>
+
+</select>
+
+</div>
+
+<!-- PIZZA -->
+
+<!-- <div class="mb-3">
+
+<label class="form-label">Pizza</label>
+
+<select th:field="*{pizza.id}" class="form-select" required>
+
+<option value="">Select Pizza</option>
+
+<option th:each="pizza : ${pizzas}"
+        th:value="${pizza.id}"
+        th:text="${pizza.name}">
+</option>
+
+</select>
+
+</div>
+
+<!-- QUANTITY -->
+
+ <!-- <div class="mb-3">
+
+<label class="form-label">Quantity</label>
+
+<input type="number"
+       th:field="*{quantity}"
+       class="form-control"
+       min="1"
+       required>
+
+</div>
+
+BUTTONS
+
+<button type="submit" class="btn btn-success">
+Save
+</button>
+
+<a th:href="@{/admin/cart}" 
+   class="btn btn-secondary ms-2">
+Cancel
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html --> -->
+ --> -->
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="container mt-4">
+
+<h2>Add Cart Item</h2>
+
+<form th:action="@{/admin/cart/add}" th:object="${cart}" method="post">
+
+    <!-- USER -->
+    <div class="mb-3">
+        <label>User</label>
+        <select th:field="*{user.id}" class="form-control" required>
+            <option value="">Select User</option>
+            <option th:each="u : ${users}"
+                    th:value="${u.id}"
+                    th:text="${u.username}">
+            </option>
+        </select>
+    </div>
+
+    <!-- PIZZA -->
+    <div class="mb-3">
+        <label>Pizza</label>
+        <select th:field="*{pizza.id}" class="form-control" required>
+            <option value="">Select Pizza</option>
+            <option th:each="p : ${pizzas}"
+                    th:value="${p.id}"
+                    th:text="${p.name}">
+            </option>
+        </select>
+    </div>
+
+    <!-- SIZE -->
+    <div class="mb-3">
+        <label>Size</label>
+        <select th:field="*{size}" class="form-control">
+            <option value="Regular">Regular</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+        </select>
+    </div>
+
+    <!-- QUANTITY -->
+    <div class="mb-3">
+        <label>Quantity</label>
+        <input type="number" th:field="*{quantity}" class="form-control" min="1" required>
+    </div>
+
+    <!-- 🔥 COUPON FIELD -->
+    <div class="mb-3">
+        <label>Coupon Code</label>
+        <input type="text" name="coupon" class="form-control"
+               placeholder="Enter coupon (e.g. CHEESE20)">
+    </div>
+
+    <!-- BUTTONS -->
+    <button type="submit" class="btn btn-success">Save</button>
+
+    <a th:href="@{/admin/cart}" class="btn btn-secondary">Cancel</a>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

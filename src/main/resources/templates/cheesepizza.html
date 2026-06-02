@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cheesy Pizza | SliceHouse</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: 'Poppins', sans-serif;
+            background: #f5b400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #111;
+            color: #fff;
+            padding: 40px;
+            border-radius: 24px;
+        }
+
+        .top-section {
+            display: flex;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        /* IMAGE FIX */
+        .top-section img {
+            width: 420px;
+            height: 450px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 22px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+
+        h1 {
+            color: #ffc107;
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .desc {
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffcc00;
+            margin: 15px 0;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: none;
+            font-size: 15px;
+        }
+
+        button {
+            background: #7b0000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .success {
+            color: #90ee90;
+            display: none;
+            margin-top: 10px;
+        }
+
+        .section {
+            margin-top: 40px;
+        }
+
+        .section h2 {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .coupon {
+            background: #1c1c1c;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .coupon span {
+            color: #ffcc00;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .top-section {
+                flex-direction: column;
+            }
+
+            .top-section img {
+                width: 100%;
+                height: 380px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- TOP DETAILS -->
+    <div class="top-section">
+
+        <img src="images/cheezepizza.png" alt="Cheesy Pizza">
+
+        <div>
+            <h1>Cheesy Pizza</h1>
+
+            <p class="desc">
+                SliceHouse’s Cheesy Pizza is crafted especially for cheese lovers.
+                Made with premium mozzarella cheese, a rich tomato base, and
+                freshly prepared dough, this pizza delivers a creamy and
+                satisfying taste in every bite. The cheese melts perfectly over
+                the crust, making it one of our most loved pizzas.
+            </p>
+
+            <p><b>Ingredients:</b></p>
+            <ul>
+                <li>Fresh Pizza Dough</li>
+                <li>Classic Tomato Sauce</li>
+                <li>100% Mozzarella Cheese</li>
+                <li>Oregano & Italian Herbs</li>
+            </ul>
+
+            <p><b>Select Size:</b></p>
+            <select id="size" onchange="updatePrice()">
+                <option value="199">Regular - ₹199</option>
+                <option value="299">Medium - ₹299</option>
+                <option value="399">Large - ₹399</option>
+            </select>
+
+            <div class="price" id="priceDisplay">₹199</div>
+
+            <label><b>Select Quantity:</b></label>
+            <select id="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+
+            <button onclick="addToCart()">Add to Cart</button>
+            <div class="success" id="successMsg">✔ Added to cart successfully</div>
+        </div>
+    </div>
+
+    <!-- COUPONS -->
+    <div class="section">
+        <h2>Offers & Coupons</h2>
+
+        <div class="coupon" >
+            <p><span>CHEESE20</span> – Get 20% OFF on orders above ₹399 <input type="radio" style="margin-left: 900px; margin-bottom: auto;" ></p>
+        </div>
+
+        <div class="coupon">
+            <p><span>SLICE50</span> – Flat ₹50 OFF on first order <input type="radio" style="margin-left: 900px; margin-bottom: auto;" ></p>
+        </div>
+
+        <div class="coupon">
+            <p><span>FREEDLV</span> – Free Delivery on orders above ₹299 <input type="radio" style="margin-left: 900px; margin-bottom: auto;" ></p>
+        </div>
+    </div>
+
+    <!-- WHY PEOPLE LOVE IT -->
+    <div class="section">
+        <h2>Why Customers Love It ❤️</h2>
+        <p class="desc">
+            Customers love this pizza for its rich cheese layers, soft crust,
+            and consistent taste. It’s perfect for quick meals, celebrations,
+            and midnight cravings.
+        </p>
+    </div>
+
+</div>
+
+<script>
+function updatePrice() {
+    const price = document.getElementById("size").value;
+    document.getElementById("priceDisplay").innerText = "₹" + price;
+}
+
+function addToCart() {
+    const sizeSelect = document.getElementById("size");
+    const sizeText = sizeSelect.options[sizeSelect.selectedIndex].text;
+    const price = sizeSelect.value;
+    const qty = document.getElementById("qty").value;
+
+    // Save cart data
+    localStorage.setItem("cartItem", "Cheesy Pizza");
+    localStorage.setItem("cartSize", sizeText);
+    localStorage.setItem("cartPrice", price);
+    localStorage.setItem("cartQty", qty);
+
+    // 🔥 Direct redirect to cart page
+    window.location.href = "/cart";
+}
+
+
+</script>
+
+</body>
+</html>

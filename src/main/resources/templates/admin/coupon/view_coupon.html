@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Coupon Management</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+.page{
+    background:#f5b400;
+    min-height:100vh;
+    padding:40px;
+}
+
+.container-box{
+    max-width:1100px;
+    margin:auto;
+    background:#111;
+    color:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+h2{
+    color:#ffc107;
+}
+
+.table{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.table th{
+    background:#222;
+    color:white;
+    text-align:center;
+}
+
+.table td{
+    text-align:center;
+    vertical-align:middle;
+}
+
+.badge{
+    padding:6px 12px;
+    font-size:12px;
+}
+
+.btn-sm{
+    padding:5px 10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+<div class="container-box">
+
+<div class="d-flex justify-content-between mb-3">
+
+    <h2>🎟 Coupon Management</h2>
+
+    <a th:href="@{/admin/coupon/add}" class="btn btn-warning">
+        + Add Coupon
+    </a>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+<thead>
+<tr>
+    <th>Code</th>
+    <th>Type</th>
+    <th>Value</th>
+    <th>Min Amount</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr th:each="c : ${coupons}">
+
+    <td th:text="${c.code}"></td>
+    <td th:text="${c.type}"></td>
+    <td th:text="${c.value}"></td>
+    <td th:text="${c.minAmount}"></td>
+
+    <td>
+        <span th:text="${c.active ? 'Active' : 'Inactive'}"
+              th:classappend="${c.active} ? 'bg-success' : 'bg-danger'"
+              class="badge">
+        </span>
+    </td>
+
+    <td>
+        <a th:href="@{/admin/coupon/delete/{id}(id=${c.couponId})}"
+           class="btn btn-danger btn-sm">
+           Delete
+        </a>
+    </td>
+
+</tr>
+
+<tr th:if="${coupons == null || coupons.isEmpty()}">
+    <td colspan="6">No coupons found</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

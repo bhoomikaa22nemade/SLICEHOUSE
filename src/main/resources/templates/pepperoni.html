@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+
+<head>
+<meta charset="UTF-8">
+<title>Pepperoni Pizzas | SliceHouse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:Poppins;
+}
+
+/* PAGE */
+
+.page-content{
+    padding:40px;
+    background:#f5b400;
+    min-height:100vh;
+}
+
+h1{
+    text-align:center;
+    color:#7b0000;
+    margin-bottom:40px;
+    font-size:38px;
+}
+
+/* remove underline */
+
+.pizza-grid a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* GRID */
+
+.pizza-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+/* CARD */
+
+.pizza-card{
+    background:#111;
+    border-radius:20px;
+    padding:18px;
+    color:white;
+    box-shadow:0 15px 35px rgba(0,0,0,0.4);
+    transition:0.3s;
+}
+
+.pizza-card:hover{
+    transform:translateY(-6px);
+}
+
+/* IMAGE */
+
+.pizza-card img{
+    width:100%;
+    height:200px;
+    object-fit:contain;
+    background:black;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+/* TITLE */
+
+.pizza-card h3{
+    margin:10px 0;
+    color:#ffc107;
+    font-size:18px;
+}
+
+/* DESCRIPTION */
+
+.pizza-card p{
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:10px;
+}
+
+/* INGREDIENTS */
+
+.ingredients{
+    font-size:13px;
+    opacity:0.9;
+}
+
+/* PRICE */
+
+.price{
+    font-weight:600;
+    color:#ffcc00;
+    font-size:16px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+.pizza-grid{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+@media(max-width:600px){
+.pizza-grid{
+grid-template-columns:1fr;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="page-content">
+
+<h1>Pepperoni Pizzas</h1>
+
+<div class="pizza-grid">
+
+<a th:each="pizza : ${pepperoniPizzas}"
+   th:href="@{/pizza/{id}(id=${pizza.id})}">
+
+<div class="pizza-card">
+
+<img th:src="@{/pizza/image/{id}(id=${pizza.id})}" alt="pizza">
+
+<h3 th:text="${pizza.name}"></h3>
+
+<p th:text="${pizza.description}"></p>
+
+<p class="ingredients">
+<b>Ingredients:</b>
+<span th:text="${pizza.smallDescription}"></span>
+</p>
+
+<p class="price">
+₹<span th:text="${pizza.sellingPrice}"></span>
+</p>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

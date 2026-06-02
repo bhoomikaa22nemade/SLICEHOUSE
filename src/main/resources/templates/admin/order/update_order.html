@@ -1,0 +1,113 @@
+<!doctype html>
+
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{admin/admin}">
+
+<body>
+
+<div layout:fragment="content">
+
+<div class="container mt-4">
+
+<h1>Update Order</h1>
+
+<form th:action="@{/admin/orders/update}"
+      method="post"
+      th:object="${order}">
+
+<!-- Hidden ID -->
+
+<input type="hidden" th:field="*{id}">
+
+<!-- USER -->
+
+<div class="mb-3">
+
+<label class="form-label">User</label>
+
+<select class="form-select" th:field="*{user.id}" required>
+
+<option value="">Select User</option>
+
+<option th:each="u : ${users}"
+        th:value="${u.id}"
+        th:text="${u.username}">
+</option>
+
+</select>
+
+</div>
+
+<!-- PIZZA -->
+
+<div class="mb-3">
+
+<label class="form-label">Pizza</label>
+
+<select class="form-select" th:field="*{pizza.id}" required>
+
+<option value="">Select Pizza</option>
+
+<option th:each="p : ${pizzas}"
+        th:value="${p.id}"
+        th:text="${p.name}">
+</option>
+
+</select>
+
+</div>
+
+<!-- ADDRESS -->
+
+<div class="mb-3">
+
+<label class="form-label">Address</label>
+
+<select class="form-select" th:field="*{address.id}" required>
+
+<option value="">Select Address</option>
+
+<option th:each="a : ${addresses}"
+        th:value="${a.id}"
+        th:text="${a.city}">
+</option>
+
+</select>
+
+</div>
+
+<!-- QUANTITY -->
+
+<div class="mb-3">
+
+<label class="form-label">Quantity</label>
+
+<input type="number"
+       class="form-control"
+       th:field="*{quantity}"
+       min="1"
+       required>
+
+</div>
+
+<!-- BUTTONS -->
+
+<button type="submit" class="btn btn-primary">
+Update Order
+</button>
+
+<a th:href="@{/admin/orders}"
+   class="btn btn-secondary ms-3">
+Cancel
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>
